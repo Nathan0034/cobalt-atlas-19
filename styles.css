@@ -291,8 +291,8 @@ html[lang="es"] label .hint {
 }
 
 .success-panel p {
-  font-size: 12px;
-  letter-spacing: 1px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
   color: #111111;
   line-height: 1.7;
 }
