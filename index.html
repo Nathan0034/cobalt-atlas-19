@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>BROOKLYN HUNTINGTON</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page">
+  <div class="card">
+
+    <div class="lang-row">
+      <button type="button" id="langToggle" class="lang-btn">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z"/></svg>
+        <span id="langLabel">Language</span>
+        <svg class="icon chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div id="langMenu" class="lang-menu hidden">
+        <button type="button" data-lang="zh-TW">繁體中文</button>
+        <button type="button" data-lang="zh-CN">简体中文</button>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="ja">日本語</button>
+        <button type="button" data-lang="ko">한국어</button>
+        <button type="button" data-lang="es">Español</button>
+      </div>
+    </div>
+
+    <div class="brand">
+      <img src="logo.png" alt="Brooklyn Huntington">
+    </div>
+
+    <form id="intakeForm" novalidate>
+
+      <div class="row row-name-gender">
+        <div class="field field-name">
+          <label data-i18n="label_name">姓名</label>
+          <div class="field-line">
+            <input type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+        </div>
+        <div class="field field-gender">
+          <label data-i18n="label_gender">性別</label>
+          <div class="pills" id="genderPills">
+            <button type="button" class="pill" data-value="F" data-i18n="gender_female">女</button>
+            <button type="button" class="pill" data-value="M" data-i18n="gender_male">男</button>
+          </div>
+          <input type="hidden" id="gender" name="gender">
+        </div>
+      </div>
+
+      <div class="field">
+        <label data-i18n="label_phone">手機號碼</label>
+        <div class="row row-phone">
+          <div class="field-line country-code-line">
+            <span class="prefix">+</span>
+            <span class="prefix">(</span>
+            <input type="tel" id="phoneCountryCode" name="phone_country_code" inputmode="numeric" maxlength="4" required>
+            <span class="prefix">)</span>
+          </div>
+          <div class="field-line">
+            <input type="tel" id="phoneNumber" name="phone_number" inputmode="numeric" autocomplete="tel-national" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label data-i18n="label_birthdate">出生年月日</label>
+        <div class="row row-birth">
+          <div class="field-line select-line">
+            <select id="birthYear" name="birth_year"></select>
+          </div>
+          <div class="field-line select-line">
+            <select id="birthMonth" name="birth_month"></select>
+          </div>
+          <div class="field-line select-line">
+            <select id="birthDay" name="birth_day"></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label data-i18n="label_email">E-mail</label>
+        <div class="field-line">
+          <input type="email" id="email" name="email" autocomplete="email">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>
+          <span data-i18n="label_address">通訊地址</span>
+          <span class="hint" data-i18n="label_address_note">（若有商品寄送需求，請務必填寫此欄）</span>
+        </label>
+
+        <div class="field-line select-line" style="margin-bottom: 12px;">
+          <select id="addressCountry" name="address_country">
+            <option value="" disabled selected data-i18n="country_select_placeholder">國家／地區</option>
+            <option value="TW" data-i18n="country_option_tw">台灣</option>
+            <option value="OTHER" data-i18n="country_option_other">其他國家／地區</option>
+          </select>
+        </div>
+
+        <div id="addressTW" class="hidden address-block">
+          <div class="row row-address">
+            <div class="field-line select-line">
+              <select id="county" name="county"></select>
+            </div>
+            <div class="field-line select-line">
+              <select id="district" name="district"></select>
+            </div>
+          </div>
+          <div class="field-line">
+            <input type="text" id="addressDetail" name="address_detail">
+          </div>
+        </div>
+
+        <div id="addressINTL" class="hidden address-block">
+          <div class="field-line">
+            <input type="text" id="addressDetailIntl" name="address_detail_intl">
+          </div>
+        </div>
+      </div>
+
+      <label class="consent">
+        <input type="checkbox" id="consent" name="marketing_consent" required>
+        <span id="consentText" data-i18n="consent_text">我同意 BROOKLYN HUNTINGTON 將我的資料用於會員服務，詳見<a href="https://www.bkhuntington.com/policies/privacy-policy" target="_blank" data-i18n="privacy_link">隱私權政策</a>。</span>
+      </label>
+
+      <button type="submit" class="submit-btn" data-i18n="submit_button">Submit</button>
+
+      <p id="formError" class="form-error hidden"></p>
+    </form>
+
+    <div id="successPanel" class="success-panel hidden">
+      <svg class="success-check" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+        <path d="M20 33l8 8 16-17" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p id="successMessage" data-i18n="success_message">歡迎您成為 BROOKLYN HUNTINGTON 的會員，感謝您的加入。</p>
+    </div>
+
+  </div>
+</div>
+
+<script src="i18n.js"></script>
+<script src="regions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
