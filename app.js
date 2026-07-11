@@ -105,15 +105,26 @@
     });
   }
 
+  function renderWithLineBreaksAtPunctuation(el, text) {
+    el.innerHTML = '';
+    const parts = text.split(/(?<=[，、。.,!?])\s*/).filter(Boolean);
+    parts.forEach((part, i) => {
+      el.appendChild(document.createTextNode(part));
+      if (i < parts.length - 1) el.appendChild(document.createElement('br'));
+    });
+  }
+
   function applyTranslations() {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
-      if (key === 'consent_text' || key === 'privacy_link') return;
+      if (key === 'consent_text' || key === 'privacy_link' || key === 'success_message') return;
       el.textContent = t(key);
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
       el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
     });
+
+    renderWithLineBreaksAtPunctuation(document.getElementById('successMessage'), t('success_message'));
 
     const consentText = document.getElementById('consentText');
     consentText.innerHTML = '';
