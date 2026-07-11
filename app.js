@@ -108,25 +108,12 @@
   function applyTranslations() {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
-      if (key === 'consent_text' || key === 'privacy_link' || key === 'success_message') return;
+      if (key === 'consent_text' || key === 'privacy_link') return;
       el.textContent = t(key);
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
       el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
     });
-
-    const successMessage = document.getElementById('successMessage');
-    const successText = t('success_message');
-    const breakPoint = successText.search(/[，、。.,!?]/);
-    successMessage.innerHTML = '';
-    if (breakPoint === -1) {
-      successMessage.appendChild(document.createTextNode(successText));
-    } else {
-      const splitAt = breakPoint + 1;
-      successMessage.appendChild(document.createTextNode(successText.slice(0, splitAt)));
-      successMessage.appendChild(document.createElement('br'));
-      successMessage.appendChild(document.createTextNode(successText.slice(splitAt)));
-    }
 
     const consentText = document.getElementById('consentText');
     consentText.innerHTML = '';
